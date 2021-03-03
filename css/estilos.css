@@ -1,0 +1,20 @@
+body {
+  padding-top: 20px;
+}
+label {
+  display: inline-block;
+}
+pre {
+  font-size: 12px;
+}
+input[type=number] {
+  width: 100px;
+  display: inline-block;
+}
+form section {
+  border-bottom: 1px solid #999;
+  padding-top: 20px;
+}
+form section:first-child {
+  border-top: 1px solid #999;
+}

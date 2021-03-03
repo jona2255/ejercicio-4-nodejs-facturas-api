@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/estilos.css">
+  <script src="js/scripts.js" defer></script>
+  <title>Facturas</title>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <form>
+      <section>
+        <div class="form-group row">
+          <div class="col-3">
+            <select class="abonadas form-control">
+              <option value="">Sin filtrar por abonadas</option>
+              <option value="si">Abonadas</option>
+              <option value="no">No abonadas</option>
+            </select>
+          </div>
+          <div class="col-3">
+            <select class="vencimiento form-control">
+              <option value="">Sin filtrar por vencimiento</option>
+              <option value="si">Vencidas</option>
+              <option value="no">No vencidas</option>
+            </select>
+          </div>
+          <div class="col-3">
+            <select class="orden form-control">
+              <option value="">Sin orden</option>
+              <option value="fecha-asc">Fecha ascendente</option>
+              <option value="fecha-desc">Fecha descendiente</option>
+              <option value="base-asc">Base imponible ascendente</option>
+              <option value="base-desc">Base imponible descendiente</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-4">
+            <label>Facturas por página:
+              <input type="number" class="elementos-pagina form-control">
+            </label>
+          </div>
+          <div class="col-4">
+            <label>Página:
+              <input type="number" class="pagina form-control">
+            </label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-2">
+            <button type="button" class="ingresos btn btn-info">ingresos</button>
+          </div>
+          <div class="col-2">
+            <button type="button" class="gastos btn btn-info">gastos</button>
+          </div>
+          <div class="col-2">
+            <button type="button" class="todas btn btn-info">todas</button>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="form-group row">
+          <div class="col-4">
+            <label>Ver factura con id:
+              <input type="number" class="id-factura form-control">
+            </label>
+          </div>
+          <div class="col-4">
+            <button type="button" class="factura btn btn-info">ver</button>
+          </div>
+        </div>
+      </section>
+    </form>
+    <section class="row">
+      <pre class="datos col"></pre>
+    </section>
+  </div>
+</body>
+
+</html>
