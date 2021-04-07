@@ -8,6 +8,9 @@ const selectAbonadas = document.querySelector(".abonadas");
 const selectVencidas = document.querySelector(".vencidas");
 const inputElemPagina = document.querySelector(".elementos-pagina");
 const inputPagina = document.querySelector(".pagina");
+const navegacion = document.querySelector(".navegacion");
+const links = navegacion.querySelectorAll("a");
+const secciones = document.querySelectorAll("section");
 const consola = document.querySelector(".datos");
 const puerto = 5000;
 
@@ -135,3 +138,27 @@ botonGastos.addEventListener("click", () => consultaDatos(getURL("gastos")));
 botonTodas.addEventListener("click", () => consultaDatos(getURL("")));
 
 botonFactura.addEventListener("click", () => consultaDatos(getURL(`factura/${inputIdFactura.value.trim()}`, false)));
+
+const navegar = path => {
+  for (const link of links) {
+    link.classList.remove("activo");
+  }
+  for (const seccion of secciones) {
+    if (seccion.dataset.path === path) {
+      seccion.hidden = false;
+      const linkActivo = navegacion.querySelector(`[data-href=${path}]`);
+      linkActivo.classList.add("activo");
+    } else {
+      seccion.hidden = true;
+    }
+  }
+};
+
+for (const link of links) {
+  link.addEventListener("click", e => {
+    e.preventDefault();
+    navegar(e.target.dataset.href);
+  });
+}
+
+navegar("listados");

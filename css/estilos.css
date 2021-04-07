@@ -11,10 +11,10 @@ input[type=number] {
   width: 100px;
   display: inline-block;
 }
-form section {
+.cabecera {
   border-bottom: 1px solid #999;
-  padding-top: 20px;
+  margin-bottom: 20px;
 }
-form section:first-child {
-  border-top: 1px solid #999;
+.activo {
+  font-weight: bold;
 }
