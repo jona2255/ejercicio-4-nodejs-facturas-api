@@ -11,6 +11,12 @@ const getURL = tipo => {
   urlBase = `${urlBase}${tipo}`;
   return urlBase;
 };
+const consultaDatos = async url => {
+  const resp = await fetch(url);
+  const datos = await resp.json();
+  consola.textContent = JSON.stringify(datos, null, 2);
+};
+
 botonIngresos.addEventListener("click", () => consultaDatos(getURL("ingresos")));
 
 botonGastos.addEventListener("click", () => consultaDatos(getURL("gastos")));
@@ -18,9 +24,3 @@ botonGastos.addEventListener("click", () => consultaDatos(getURL("gastos")));
 botonTodas.addEventListener("click", () => consultaDatos(getURL("")));
 
 botonFactura.addEventListener("click", () => consultaDatos(getURL(`factura/${inputIdFactura.value}`)));
-
-const consultaDatos = async url => {
-  const resp = await fetch(url);
-  const datos = await resp.json();
-  consola.textContent = JSON.stringify(datos, null, 2);
-};

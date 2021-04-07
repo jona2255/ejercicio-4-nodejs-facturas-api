@@ -3,7 +3,9 @@
 Monta una API a partir del JSON de facturas. Esta API debe tener los siguientes endpoints:
 
 (GET) /facturas/ -> listado de todas las facturas
+
 (GET) /facturas/ingresos -> listado de ingresos
+
 (GET) /facturas/gastos -> listado de gastos
 
 Estos tres endpoints anteriores deben devolver un objeto con esta forma:
@@ -15,9 +17,13 @@ Estos tres endpoints anteriores deben devolver un objeto con esta forma:
 ```
 
 (GET) /facturas/factura/:idFactura -> detalle de una factura a partir de su id
+
 (POST) /facturas/factura -> crear una nueva factura, devuelve la factura nueva
+
 (PUT) /facturas/factura/:idFactura -> sustituir una factura por otra a partir de su id, devuelve la factura nueva
+
 (PATCH) /facturas/factura/:idFactura -> modificar una parte de una factura a partir de su id, devuelve la factura modificada
+
 (DELETE) /facturas/factura/:idFactura -> borrar una factura a partir de su id, devuelve la factura borrada
 
 Todos los endpoints que reciban una factura en el body deben validar su forma con express-validator. Los datos obligatorios que debe llevar una factura son `id`, `numero`, `fecha`, `base`, `tipoIva`, `tipo` y `abonada`.
