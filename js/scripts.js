@@ -6,6 +6,8 @@ const inputIdFactura = document.querySelector(".id-factura");
 const selectOrden = document.querySelector(".orden");
 const selectAbonadas = document.querySelector(".abonadas");
 const selectVencidas = document.querySelector(".vencidas");
+const inputElemPagina = document.querySelector(".elementos-pagina");
+const inputPagina = document.querySelector(".pagina");
 const consola = document.querySelector(".datos");
 const puerto = 5000;
 
@@ -27,14 +29,18 @@ let query = {
   ordenPor: null,
   orden: null,
   abonadas: null,
-  vencidas: null
+  vencidas: null,
+  elementosPorPagina: null,
+  pagina: null
 };
 const resetQuery = () => {
   query = {
     ordenPor: null,
     orden: null,
     abonadas: null,
-    vencidas: null
+    vencidas: null,
+    elementosPorPagina: null,
+    pagina: null
   };
 };
 const getQuery = () => {
@@ -49,6 +55,12 @@ const getQuery = () => {
   }
   if (query.vencidas !== null) {
     queryParams.push(`vencidas=${query.vencidas ? "true" : "false"}`);
+  }
+  if (query.elementosPorPagina !== null) {
+    queryParams.push(`nPorPagina=${query.elementosPorPagina}`);
+  }
+  if (query.pagina !== null) {
+    queryParams.push(`pagina=${query.pagina}`);
   }
   queryString += queryParams.join("&");
   if (queryString === "?") {
@@ -109,6 +121,12 @@ selectVencidas.addEventListener("change", () => {
       break;
   }
 });
+inputElemPagina.addEventListener("change", () => {
+  query.elementosPorPagina = inputElemPagina.value !== "" ? inputElemPagina.value.trim() : null;
+});
+inputPagina.addEventListener("change", () => {
+  query.pagina = inputPagina.value !== "" ? inputPagina.value.trim() : null;
+});
 
 botonIngresos.addEventListener("click", () => consultaDatos(getURL("ingresos")));
 
@@ -116,4 +134,4 @@ botonGastos.addEventListener("click", () => consultaDatos(getURL("gastos")));
 
 botonTodas.addEventListener("click", () => consultaDatos(getURL("")));
 
-botonFactura.addEventListener("click", () => consultaDatos(getURL(`factura/${inputIdFactura.value}`, false)));
+botonFactura.addEventListener("click", () => consultaDatos(getURL(`factura/${inputIdFactura.value.trim()}`, false)));
