@@ -7,8 +7,9 @@ const selectOrden = document.querySelector(".orden");
 const selectAbonadas = document.querySelector(".abonadas");
 const selectVencidas = document.querySelector(".vencidas");
 const inputElemPagina = document.querySelector(".elementos-pagina");
-const inputPagina = document.querySelector(".pagina");
+const inputPagina = document.querySelector(".n-pagina");
 const formNuevaFactura = document.querySelector("form.nueva-factura");
+const formBorrarFactura = document.querySelector("form.borrar-factura");
 const navegacion = document.querySelector(".navegacion");
 const links = navegacion.querySelectorAll("a");
 const radioTipo = document.querySelectorAll(".tipo");
@@ -212,4 +213,13 @@ formNuevaFactura.addEventListener("submit", async e => {
   consola.textContent = JSON.stringify(datos, null, 2);
 });
 
-navegar("listados");
+formBorrarFactura.addEventListener("submit", async e => {
+  e.preventDefault();
+  const resp = await fetch(`${urlAPI}factura/${formBorrarFactura.querySelector(".id-factura-borrar").value.trim()}`, {
+    method: "DELETE"
+  });
+  const datos = await resp.json();
+  consola.textContent = JSON.stringify(datos, null, 2);
+});
+
+navegar("borrar-factura");

@@ -22,6 +22,8 @@
           <li class="list-inline-item"><a href="nueva-factura" data-href="nueva-factura">Añadir factura</a></li>
           <li class="list-inline-item"><a href="modificar-factura" data-href="modificar-factura">Modificar factura</a>
           </li>
+          <li class="list-inline-item"><a href="borrar-factura" data-href="borrar-factura">Borrar factura</a>
+          </li>
         </ul>
       </nav>
     </header>
@@ -59,7 +61,7 @@
         </div>
         <div class="col-4">
           <label>Página:
-            <input type="number" class="pagina form-control">
+            <input type="number" class="n-pagina form-control">
           </label>
         </div>
       </div>
@@ -148,6 +150,18 @@
       </form>
     </section>
     <section class="pagina" data-path="modificar-factura" hidden></section>
+    <section class="pagina" data-path="borrar-factura" hidden>
+      <form class="borrar-factura">
+        <div class="row">
+          <div class="col-4">
+            <label>Id de la factura:</label> <input type="number" class="id-factura-borrar form-control">
+          </div>
+          <div class="col-4">
+            <button class="btn btn-info">Borrar</button>
+          </div>
+        </div>
+      </form>
+    </section>
     <section class="row">
       <pre class="datos col"></pre>
     </section>
