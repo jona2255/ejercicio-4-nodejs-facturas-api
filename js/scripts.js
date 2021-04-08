@@ -16,7 +16,7 @@ const links = navegacion.querySelectorAll("a");
 const radioTipo = document.querySelectorAll(".tipo");
 const secciones = document.querySelectorAll(".pagina");
 const consola = document.querySelector(".datos");
-const puerto = 3001;
+const puerto = 5000;
 
 const urlAPI = `http://localhost:${puerto}/facturas/`;
 
