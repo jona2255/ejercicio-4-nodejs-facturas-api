@@ -247,7 +247,7 @@ formModificarFactura.addEventListener("submit", async e => {
     facturaModificada.base = formNuevaFactura.querySelector(".base").value;
   }
   if (formNuevaFactura.querySelector(".tipo-iva").value.trim() !== "") {
-    facturaModificada.numero = formNuevaFactura.querySelector(".tipo-iva").value;
+    facturaModificada.tipoIva = formNuevaFactura.querySelector(".tipo-iva").value;
   }
   if (formNuevaFactura.querySelector(".tipo").value.trim() !== "") {
     facturaModificada.tipo = formNuevaFactura.querySelector(".tipo").value;
