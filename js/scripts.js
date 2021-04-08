@@ -10,12 +10,13 @@ const inputElemPagina = document.querySelector(".elementos-pagina");
 const inputPagina = document.querySelector(".n-pagina");
 const formNuevaFactura = document.querySelector("form.nueva-factura");
 const formBorrarFactura = document.querySelector("form.borrar-factura");
+const formModificarFactura = document.querySelector("form.modificar-factura");
 const navegacion = document.querySelector(".navegacion");
 const links = navegacion.querySelectorAll("a");
 const radioTipo = document.querySelectorAll(".tipo");
 const secciones = document.querySelectorAll(".pagina");
 const consola = document.querySelector(".datos");
-const puerto = 5000;
+const puerto = 3001;
 
 const urlAPI = `http://localhost:${puerto}/facturas/`;
 
@@ -31,6 +32,10 @@ const consultaDatos = async url => {
   const resp = await fetch(url);
   const datos = await resp.json();
   consola.textContent = JSON.stringify(datos, null, 2);
+};
+
+const borrarConsola = () => {
+  consola.textContent = "";
 };
 
 let query = {
@@ -145,6 +150,7 @@ botonTodas.addEventListener("click", () => consultaDatos(getURLListado("")));
 botonFactura.addEventListener("click", () => consultaDatos(getURLListado(`factura/${inputIdFactura.value.trim()}`, false)));
 
 const navegar = path => {
+  borrarConsola();
   for (const link of links) {
     link.classList.remove("activo");
   }
@@ -222,4 +228,45 @@ formBorrarFactura.addEventListener("submit", async e => {
   consola.textContent = JSON.stringify(datos, null, 2);
 });
 
-navegar("borrar-factura");
+formModificarFactura.addEventListener("submit", async e => {
+  e.preventDefault();
+  const facturaModificada = {};
+  if (formNuevaFactura.querySelector(".numero").value.trim() !== "") {
+    facturaModificada.numero = formNuevaFactura.querySelector(".numero").value;
+  }
+  if (formNuevaFactura.querySelector(".fecha").value.trim() !== "") {
+    facturaModificada.fecha = `${new Date(formNuevaFactura.querySelector(".fecha").value.trim()).getTime()}`;
+  }
+  if (formNuevaFactura.querySelector(".vencimiento").value.trim() !== "") {
+    facturaModificada.vencimiento = `${new Date(formNuevaFactura.querySelector(".vencimiento").value.trim()).getTime()}`;
+  }
+  if (formNuevaFactura.querySelector(".concepto").value.trim() !== "") {
+    facturaModificada.concepto = formNuevaFactura.querySelector(".concepto").value;
+  }
+  if (formNuevaFactura.querySelector(".base").value.trim() !== "") {
+    facturaModificada.base = formNuevaFactura.querySelector(".base").value;
+  }
+  if (formNuevaFactura.querySelector(".tipo-iva").value.trim() !== "") {
+    facturaModificada.numero = formNuevaFactura.querySelector(".tipo-iva").value;
+  }
+  if (formNuevaFactura.querySelector(".tipo").value.trim() !== "") {
+    facturaModificada.tipo = formNuevaFactura.querySelector(".tipo").value;
+  }
+  if (formNuevaFactura.querySelector(".abonada").value.trim() !== "") {
+    if (formNuevaFactura.querySelector(".abonada").value === "true") {
+      facturaModificada.abonada = true;
+    } else if (formNuevaFactura.querySelector(".abonada").value === "false") {
+      facturaModificada.abonada = false;
+    }
+  }
+  const resp = await fetch(`${urlAPI}factura/${formModificarFactura.querySelector(".id-factura-modificar").value.trim()}`, {
+    method: formModificarFactura.querySelector("[name=metodo]:checked").value,
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(facturaModificada)
+  });
+  const datos = await resp.json();
+  consola.textContent = JSON.stringify(datos, null, 2);
+});
+navegar("listados");

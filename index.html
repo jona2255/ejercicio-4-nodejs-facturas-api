@@ -149,7 +149,78 @@
         </div>
       </form>
     </section>
-    <section class="pagina" data-path="modificar-factura" hidden></section>
+    <section class="pagina" data-path="modificar-factura" hidden>
+      <form class="modificar-factura">
+        <div class="form-group row">
+          <div class="col-4">
+            <label>Id de la factura:
+              <input type="number" class="id-factura-modificar form-control">
+            </label>
+          </div>
+          <div class="col-4">
+            Método:
+            <label><input type="radio" name="metodo" value="PUT" checked> PUT</label>
+            <label><input type="radio" name="metodo" value="PATCH"> PATCH</label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-4">
+            <label>Número:
+              <input type="text" class="numero form-control">
+            </label>
+          </div>
+          <div class="col-4">
+            <label>Fecha:
+              <input type="date" class="fecha form-control">
+            </label>
+          </div>
+          <div class="col-4">
+            <label>Vencimiento:
+              <input type="date" class="vencimiento form-control">
+            </label>
+          </div>
+          <div class="col-4">
+            <label>Concepto:
+              <input type="text" class="concepto form-control">
+            </label>
+          </div>
+          <div class="col-4">
+            <label>Base imponible:
+              <input type="text" class="base form-control">
+            </label>
+          </div>
+          <div class="col-4">
+            <label>Tipo IVA (%):
+              <input type="text" class="tipo-iva form-control">
+            </label>
+          </div>
+          <div class="col-4">
+            <label>
+              Tipo:
+              <select class="tipo form-control">
+                <option value="ingreso">Ingreso</option>
+                <option value="gasto">Gasto</option>
+                <option value="otro">Otro</option>
+                <option value="">Vacío</option>
+              </select>
+            </label>
+          </div>
+          <div class="col-4">
+            <label>
+              Abonada:
+              <select class="abonada form-control">
+                <option value="true">Sí</option>
+                <option value="false">No</option>
+                <option value="">Vacío</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-info">Modificar</button>
+        </div>
+      </form>
+    </section>
     <section class="pagina" data-path="borrar-factura" hidden>
       <form class="borrar-factura">
         <div class="row">
