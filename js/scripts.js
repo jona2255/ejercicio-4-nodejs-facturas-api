@@ -196,7 +196,7 @@ formNuevaFactura.addEventListener("submit", async e => {
     nuevaFactura.base = formNuevaFactura.querySelector(".base").value;
   }
   if (formNuevaFactura.querySelector(".tipo-iva").value.trim() !== "") {
-    nuevaFactura.numero = formNuevaFactura.querySelector(".tipo-iva").value;
+    nuevaFactura.tipoIva = formNuevaFactura.querySelector(".tipo-iva").value;
   }
   if (formNuevaFactura.querySelector(".tipo").value.trim() !== "") {
     nuevaFactura.tipo = formNuevaFactura.querySelector(".tipo").value;
@@ -231,34 +231,35 @@ formBorrarFactura.addEventListener("submit", async e => {
 formModificarFactura.addEventListener("submit", async e => {
   e.preventDefault();
   const facturaModificada = {};
-  if (formNuevaFactura.querySelector(".numero").value.trim() !== "") {
-    facturaModificada.numero = formNuevaFactura.querySelector(".numero").value;
+  if (formModificarFactura.querySelector(".numero").value.trim() !== "") {
+    facturaModificada.numero = formModificarFactura.querySelector(".numero").value;
   }
-  if (formNuevaFactura.querySelector(".fecha").value.trim() !== "") {
-    facturaModificada.fecha = `${new Date(formNuevaFactura.querySelector(".fecha").value.trim()).getTime()}`;
+  if (formModificarFactura.querySelector(".fecha").value.trim() !== "") {
+    facturaModificada.fecha = `${new Date(formModificarFactura.querySelector(".fecha").value.trim()).getTime()}`;
   }
-  if (formNuevaFactura.querySelector(".vencimiento").value.trim() !== "") {
-    facturaModificada.vencimiento = `${new Date(formNuevaFactura.querySelector(".vencimiento").value.trim()).getTime()}`;
+  if (formModificarFactura.querySelector(".vencimiento").value.trim() !== "") {
+    facturaModificada.vencimiento = `${new Date(formModificarFactura.querySelector(".vencimiento").value.trim()).getTime()}`;
   }
-  if (formNuevaFactura.querySelector(".concepto").value.trim() !== "") {
-    facturaModificada.concepto = formNuevaFactura.querySelector(".concepto").value;
+  if (formModificarFactura.querySelector(".concepto").value.trim() !== "") {
+    facturaModificada.concepto = formModificarFactura.querySelector(".concepto").value;
   }
-  if (formNuevaFactura.querySelector(".base").value.trim() !== "") {
-    facturaModificada.base = formNuevaFactura.querySelector(".base").value;
+  if (formModificarFactura.querySelector(".base").value.trim() !== "") {
+    facturaModificada.base = formModificarFactura.querySelector(".base").value;
   }
-  if (formNuevaFactura.querySelector(".tipo-iva").value.trim() !== "") {
-    facturaModificada.numero = formNuevaFactura.querySelector(".tipo-iva").value;
+  if (formModificarFactura.querySelector(".tipo-iva").value.trim() !== "") {
+    facturaModificada.tipoIva = formModificarFactura.querySelector(".tipo-iva").value;
   }
-  if (formNuevaFactura.querySelector(".tipo").value.trim() !== "") {
-    facturaModificada.tipo = formNuevaFactura.querySelector(".tipo").value;
+  if (formModificarFactura.querySelector(".tipo").value.trim() !== "") {
+    facturaModificada.tipo = formModificarFactura.querySelector(".tipo").value;
   }
-  if (formNuevaFactura.querySelector(".abonada").value.trim() !== "") {
-    if (formNuevaFactura.querySelector(".abonada").value === "true") {
+  if (formModificarFactura.querySelector(".abonada").value.trim() !== "") {
+    if (formModificarFactura.querySelector(".abonada").value === "true") {
       facturaModificada.abonada = true;
-    } else if (formNuevaFactura.querySelector(".abonada").value === "false") {
+    } else if (formModificarFactura.querySelector(".abonada").value === "false") {
       facturaModificada.abonada = false;
     }
   }
+  console.log(facturaModificada);
   const resp = await fetch(`${urlAPI}factura/${formModificarFactura.querySelector(".id-factura-modificar").value.trim()}`, {
     method: formModificarFactura.querySelector("[name=metodo]:checked").value,
     headers: {
