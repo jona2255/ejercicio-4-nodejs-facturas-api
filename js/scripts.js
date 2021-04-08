@@ -8,14 +8,18 @@ const selectAbonadas = document.querySelector(".abonadas");
 const selectVencidas = document.querySelector(".vencidas");
 const inputElemPagina = document.querySelector(".elementos-pagina");
 const inputPagina = document.querySelector(".pagina");
+const formNuevaFactura = document.querySelector("form.nueva-factura");
 const navegacion = document.querySelector(".navegacion");
 const links = navegacion.querySelectorAll("a");
-const secciones = document.querySelectorAll("section");
+const radioTipo = document.querySelectorAll(".tipo");
+const secciones = document.querySelectorAll(".pagina");
 const consola = document.querySelector(".datos");
 const puerto = 5000;
 
-const getURL = (tipo, queryString = true) => {
-  let urlBase = `http://localhost:${puerto}/facturas/`;
+const urlAPI = `http://localhost:${puerto}/facturas/`;
+
+const getURLListado = (tipo, queryString = true) => {
+  let urlBase = urlAPI;
   urlBase = `${urlBase}${tipo}`;
   if (queryString) {
     urlBase += getQuery();
@@ -131,13 +135,13 @@ inputPagina.addEventListener("change", () => {
   query.pagina = inputPagina.value !== "" ? inputPagina.value.trim() : null;
 });
 
-botonIngresos.addEventListener("click", () => consultaDatos(getURL("ingresos")));
+botonIngresos.addEventListener("click", () => consultaDatos(getURLListado("ingresos")));
 
-botonGastos.addEventListener("click", () => consultaDatos(getURL("gastos")));
+botonGastos.addEventListener("click", () => consultaDatos(getURLListado("gastos")));
 
-botonTodas.addEventListener("click", () => consultaDatos(getURL("")));
+botonTodas.addEventListener("click", () => consultaDatos(getURLListado("")));
 
-botonFactura.addEventListener("click", () => consultaDatos(getURL(`factura/${inputIdFactura.value.trim()}`, false)));
+botonFactura.addEventListener("click", () => consultaDatos(getURLListado(`factura/${inputIdFactura.value.trim()}`, false)));
 
 const navegar = path => {
   for (const link of links) {
@@ -160,5 +164,52 @@ for (const link of links) {
     navegar(e.target.dataset.href);
   });
 }
+
+const getURLNueva = () => {
+  const urlBase = `${urlAPI}/factura/`;
+  return urlBase;
+};
+
+formNuevaFactura.addEventListener("submit", async e => {
+  e.preventDefault();
+  const nuevaFactura = {};
+  if (formNuevaFactura.querySelector(".numero").value.trim() !== "") {
+    nuevaFactura.numero = formNuevaFactura.querySelector(".numero").value;
+  }
+  if (formNuevaFactura.querySelector(".fecha").value.trim() !== "") {
+    nuevaFactura.fecha = `${new Date(formNuevaFactura.querySelector(".fecha").value.trim()).getTime()}`;
+  }
+  if (formNuevaFactura.querySelector(".vencimiento").value.trim() !== "") {
+    nuevaFactura.vencimiento = `${new Date(formNuevaFactura.querySelector(".vencimiento").value.trim()).getTime()}`;
+  }
+  if (formNuevaFactura.querySelector(".concepto").value.trim() !== "") {
+    nuevaFactura.concepto = formNuevaFactura.querySelector(".concepto").value;
+  }
+  if (formNuevaFactura.querySelector(".base").value.trim() !== "") {
+    nuevaFactura.base = formNuevaFactura.querySelector(".base").value;
+  }
+  if (formNuevaFactura.querySelector(".tipo-iva").value.trim() !== "") {
+    nuevaFactura.numero = formNuevaFactura.querySelector(".tipo-iva").value;
+  }
+  if (formNuevaFactura.querySelector(".tipo").value.trim() !== "") {
+    nuevaFactura.tipo = formNuevaFactura.querySelector(".tipo").value;
+  }
+  if (formNuevaFactura.querySelector(".abonada").value.trim() !== "") {
+    if (formNuevaFactura.querySelector(".abonada").value === "true") {
+      nuevaFactura.abonada = true;
+    } else if (formNuevaFactura.querySelector(".abonada").value === "false") {
+      nuevaFactura.abonada = false;
+    }
+  }
+  const resp = await fetch(`${urlAPI}factura/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(nuevaFactura)
+  });
+  const datos = await resp.json();
+  consola.textContent = JSON.stringify(datos, null, 2);
+});
 
 navegar("listados");
